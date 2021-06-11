@@ -1,0 +1,23 @@
+{
+  "name": "memories",
+  "description": "# What is this app?  This app is the MERN stack app that is build on node on backend and react and redux on frontend.  Clone the folder. Go to client folder and install the dependencies. Next, go to server folder and do the same process too.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morris-Zin/Memories.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Morris-Zin/Memories/issues"
+  },
+  "homepage": "https://github.com/Morris-Zin/Memories#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
