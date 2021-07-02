@@ -9,9 +9,17 @@ import {
 const postReducer = (posts = [], action) => {
   switch (action.type) {
     case FETCH_POSTS:
-      return action.payload;
+      return {
+        ...posts,
+        posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPage: action.payload.numberOfPage,
+      };
     case FETCH_BY_SEARCH:
-      return action.payload;
+      return {
+        ...posts,
+        posts: action.payload,
+      };
     case CREATE:
       return [...posts, action.payload];
     case UPDATE:

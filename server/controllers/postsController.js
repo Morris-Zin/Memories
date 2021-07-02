@@ -3,8 +3,21 @@ import mongoose from "mongoose";
 
 export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find({});
-    res.status(200).json(posts);
+    const { page } = req.query;
+    const LIMIT = 8;
+    const startIndex = (Number(page) - 1) * LIMIT;
+    const total = await  Post.countDocuments({})
+    console.log('total man', total, 'limit', LIMIT)
+    
+    const posts = await Post.find({})
+      .sort({ _id: -1 })
+      .limit(LIMIT)
+      .skip(startIndex);
+    res.status(200).json({
+      data: posts,
+      currentPage: +page,
+      numberOfPage: Math.ceil(total / LIMIT),
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -15,11 +28,13 @@ export const getPostsBySearch = async (req, res) => {
   console.log("this is searched queyr", searchQuery, "And this is tags", tags);
   try {
     const title = new RegExp(searchQuery, "i");
-    const posts = await Post.find({
-      $or: [{ title }, { tags: { $in: tags.split(",") } }],
-    });
-    console.log("this is the post", posts);
-    res.json({ data: posts });
+    if (title || tags.length) {
+      const posts = await Post.find({
+        $or: [{ title }, { tags: { $in: tags.split(",") } }],
+      });
+      console.log("this is the post", posts);
+      res.json({ data: posts });
+    }
   } catch (error) {
     console.log(error);
     res.json(error.message);

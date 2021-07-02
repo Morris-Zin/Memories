@@ -1,13 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container } from "@material-ui/core";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import PostDetails from "./components/PostDetails/PostDetails";
+import { useDispatch } from "react-redux";
+import { getPosts } from "./actions/posts";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
+  const dispatch =     useDispatch()
+
+
   return (
     <Container maxWidth="xl">
     <BrowserRouter>
