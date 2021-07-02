@@ -6,9 +6,9 @@ export const getPosts = async (req, res) => {
     const { page } = req.query;
     const LIMIT = 8;
     const startIndex = (Number(page) - 1) * LIMIT;
-    const total = await  Post.countDocuments({})
-    console.log('total man', total, 'limit', LIMIT)
-    
+    const total = await Post.countDocuments({});
+    console.log("total man", total, "limit", LIMIT);
+
     const posts = await Post.find({})
       .sort({ _id: -1 })
       .limit(LIMIT)
@@ -20,6 +20,16 @@ export const getPosts = async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({ message: error.message });
+  }
+};
+
+export const getPost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await Post.findById(id);
+    res.json(post);
+  } catch (error) {
+    console.log(error);
   }
 };
 

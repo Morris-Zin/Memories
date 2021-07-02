@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const post = useSelector((state) =>
-    currentId ? state.posts.find((post) => post._id === currentId) : null
+    currentId ? state.posts.posts.find((post) => post._id === currentId) : null
   );
   const user = JSON.parse(localStorage.getItem('profile'))
 
@@ -56,7 +56,7 @@ const Form = ({ currentId, setCurrentId }) => {
     )
   }
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={5}>
       <form
         autoComplete="off"
         noValidate
