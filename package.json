@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd memories-api-myanmar && npm run dev\" \"cd client && npm start\""
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\""
   },
   "repository": {
     "type": "git",
